@@ -1,3 +1,4 @@
+package server;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -7,22 +8,20 @@ import java.util.concurrent.Executors;
 public class MultiThreadedTCPServer {
 
     public MultiThreadedTCPServer() throws IOException {
-        this(7);
+        this(4000);
     }
 
     public MultiThreadedTCPServer(int port) throws IOException {
-        ServerSocket server = null;
-        server = new ServerSocket(port);
-
+        ServerSocket serverSocket = new ServerSocket(port);
         ExecutorService executor = Executors.newFixedThreadPool(5);
 
         for (int i = 1; i < 6; i++) {
-            WorkerThreadServer workerThread = new WorkerThreadServer(i,server);
+            WorkerThreadServer workerThread = new WorkerThreadServer(i,serverSocket);
             executor.submit(workerThread);
         }
         executor.shutdown();
         while(!(executor.isTerminated())){}
-        server.close();
+        serverSocket.close();
 
     }
 
