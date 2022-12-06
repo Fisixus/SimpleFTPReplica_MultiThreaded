@@ -15,6 +15,8 @@ public class WorkerThreadServer extends Thread {
     private final static String LOCATION_NOT_ACCESSIBLE_MESSAGE = "LOCATION IS NOT ACCESSIBLE!";
     private final static String LOCATION_ACCESSIBLE_MESSAGE = "LOCATION IS SUCCESSFULLY CHANGED!";
 
+    private final String DEFAULT_LOC = "\\SimpleFTPReplica_MultiThreaded";
+
     private int threadNumber;
     private ServerSocket serverSocket;
 
@@ -27,6 +29,7 @@ public class WorkerThreadServer extends Thread {
     public void run() {
         System.out.println("Starting WorkerThread(" + threadNumber + ")");
         try {
+            String currentLoc = DEFAULT_LOC;
             ObjectOutputStream output;
             ObjectInputStream input;
             Socket socket = serverSocket.accept();
@@ -38,7 +41,7 @@ public class WorkerThreadServer extends Thread {
                 FTPState state = FTPFunctionality.ReturnRequestType(command);
                 switch (state){
                     case LS:
-                        String lsOutput = FTPFunctionality.DoLS();
+                        String lsOutput = FTPFunctionality.DoLS(currentLoc);
                         output.writeObject(lsOutput);
                         break;
                     case CD:
@@ -52,7 +55,7 @@ public class WorkerThreadServer extends Thread {
                         break;
                     case GET:
                         String filename = FTPFunctionality.GetFilenameFromGET(command);
-                        if(!FileFunctionality.FileIsExist(filename))
+                        if(!FileFunctionality.FileIsExist(currentLoc,filename))
                             output.writeObject(FILE_CANT_FIND_MESSAGE);
                         else{
                             String content = FTPFunctionality.DoGET(command);

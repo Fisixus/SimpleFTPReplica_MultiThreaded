@@ -26,7 +26,7 @@ public class FTPFunctionality {
         }
     }
 
-    public static String DoLS() {
+    public static String DoLS(String currentLoc) {
     }
 
     public static void DoCD(String command) {
