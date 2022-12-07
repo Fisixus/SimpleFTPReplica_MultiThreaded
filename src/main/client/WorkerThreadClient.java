@@ -14,7 +14,7 @@ public class WorkerThreadClient implements Runnable {
 
     private int threadNumber;
 
-    private final String DEFAULT_LOC = "\\SimpleFTPReplica_MultiThreaded";
+    private final String DEFAULT_LOC = ".";
 
 
     public WorkerThreadClient(int n) {
@@ -47,7 +47,8 @@ public class WorkerThreadClient implements Runnable {
             input = new ObjectInputStream(socket.getInputStream());
             Scanner myScanner = new Scanner(System.in);
 
-            //output.writeObject("Connection is established from Thread:"+threadNumber);
+            output.writeObject(inetAddress.toString());
+            System.out.println("Connection is established with server!");
             String command = "";
             String takenMessage = "";
             String filename = "";
@@ -74,7 +75,7 @@ public class WorkerThreadClient implements Runnable {
                 }
                 output.flush();
 
-            }while(command.equalsIgnoreCase("exit"));
+            }while(!command.equalsIgnoreCase("exit"));
 
             try {
                 System.out.println("Terminating WorkerThread(" + threadNumber + ")");
@@ -84,6 +85,7 @@ public class WorkerThreadClient implements Runnable {
                 throw new RuntimeException(e);
             }
         } catch (Exception e) {
+            System.out.println("EXCEPTION!");
             throw new RuntimeException(e);
         }
 

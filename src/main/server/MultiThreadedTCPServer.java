@@ -13,9 +13,9 @@ public class MultiThreadedTCPServer {
 
     public MultiThreadedTCPServer(int port) throws IOException {
         ServerSocket serverSocket = new ServerSocket(port);
-        ExecutorService executor = Executors.newFixedThreadPool(5);
+        ExecutorService executor = Executors.newFixedThreadPool(1);
 
-        for (int i = 1; i < 6; i++) {
+        for (int i = 1; i < 2; i++) {
             WorkerThreadServer workerThread = new WorkerThreadServer(i,serverSocket);
             executor.submit(workerThread);
         }
