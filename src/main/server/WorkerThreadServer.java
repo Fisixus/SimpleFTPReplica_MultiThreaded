@@ -76,7 +76,7 @@ public class WorkerThreadServer extends Thread {
             //socket.close();
 
         } catch (Exception e) {
-            System.out.println("EXCEPTION!");
+            //System.out.println("EXCEPTION!One person left!");
             throw new RuntimeException(e);
         }
     }

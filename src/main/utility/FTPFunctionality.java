@@ -12,21 +12,21 @@ public class FTPFunctionality {
 
         if(splited[0].equalsIgnoreCase(FTPState.CD.toString())){
             if(splited.length > 2)
-                return FTPState.None;
+                return FTPState.Error;
             return FTPState.CD;
         }
         else if(splited[0].equalsIgnoreCase(FTPState.GET.toString())){
             if(splited.length > 2)
-                return FTPState.None;
+                return FTPState.Error;
             return FTPState.GET;
         }
         else if(splited[0].equalsIgnoreCase(FTPState.LS.toString())){
             if(splited.length > 1)
-                return FTPState.None;
+                return FTPState.Error;
             return FTPState.LS;
         }
         else{
-            return FTPState.None;
+            return FTPState.Error;
         }
     }
 

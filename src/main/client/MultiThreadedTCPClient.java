@@ -6,7 +6,7 @@ import java.util.concurrent.Executors;
 
 public class MultiThreadedTCPClient {
     public MultiThreadedTCPClient() throws IOException {
-        ExecutorService executor = Executors.newFixedThreadPool(1);
+        ExecutorService executor = Executors.newFixedThreadPool(2);
 
         for (int i = 1; i < 2; i++) {
             WorkerThreadClient workerThread = new WorkerThreadClient(i);

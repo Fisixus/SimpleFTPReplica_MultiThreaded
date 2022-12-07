@@ -4,6 +4,6 @@ public enum FTPState {
     GET,
     LS,
     CD,
+    Error
 
-    None
 }
