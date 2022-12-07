@@ -45,11 +45,10 @@ public class WorkerThreadServer extends Thread {
                         output.writeObject(lsOutput);
                         break;
                     case CD:
-                        String newLoc = FTPFunctionality.GetNewLocationFromCD(command);
+                        String newLoc = FTPFunctionality.DoCD(command);
                         if(!FileFunctionality.LocationIsAccessible(newLoc))
                             output.writeObject(LOCATION_NOT_ACCESSIBLE_MESSAGE);
                         else{
-                            FTPFunctionality.DoCD(command);
                             output.writeObject(LOCATION_ACCESSIBLE_MESSAGE);
                         }
                         break;
@@ -58,7 +57,7 @@ public class WorkerThreadServer extends Thread {
                         if(!FileFunctionality.FileIsExist(currentLoc,filename))
                             output.writeObject(FILE_CANT_FIND_MESSAGE);
                         else{
-                            String content = FTPFunctionality.DoGET(command);
+                            String content = FTPFunctionality.DoGET(currentLoc+"\\"+filename);
                             output.writeObject(content);
                         }
                         break;
