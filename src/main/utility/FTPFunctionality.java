@@ -48,7 +48,7 @@ public class FTPFunctionality {
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 //System.out.println(data);
-                allStr += data;
+                allStr += data + "\n";
             }
             myReader.close();
         } catch (FileNotFoundException e) {

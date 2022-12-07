@@ -14,7 +14,7 @@ public class WorkerThreadClient implements Runnable {
 
     private int threadNumber;
 
-    private final String DEFAULT_LOC = ".";
+    private final String DEFAULT_LOC = ".\\src";
 
 
     public WorkerThreadClient(int n) {
@@ -64,6 +64,7 @@ public class WorkerThreadClient implements Runnable {
                     takenMessage = (String)input.readObject();
                     if(!takenMessage.equals(FILE_CANT_FIND_MESSAGE)){
                         WriteToFile(takenMessage,currentLoc+"\\"+filename);
+                        System.out.println(filename + " has been saved in " + currentLoc);
                     }
                     else{
                         System.out.println(takenMessage);
